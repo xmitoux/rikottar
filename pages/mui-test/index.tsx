@@ -1,4 +1,5 @@
 import AppBar from '../../components/hide-appbar';
+import BottomNavigation from '../../components/bottom-navigation';
 
 export default function MuiTest() {
   return (
@@ -14,6 +15,7 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
           )
           .join('\n')}
       </div>
+      <BottomNavigation />
     </div>
   );
 }
