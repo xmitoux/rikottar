@@ -2,7 +2,6 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
 import Container from '@mui/material/Container';
@@ -32,7 +31,6 @@ type Props2 = {
 export default function HideAppBar(props: Props2) {
   return (
     <React.Fragment>
-      <CssBaseline />
       <HideOnScroll>
         <AppBar>
           <Toolbar sx={{ justifyContent: 'center' }}>
