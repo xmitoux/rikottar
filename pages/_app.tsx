@@ -4,12 +4,45 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { pink } from '@mui/material/colors';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: pink[300],
+      main: '#ffb7c5',
+    },
+
+    text: {
+      primary: '#fc89ac',
+    },
+  },
+
+  components: {
+    // Name of the component
+    MuiButton: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          color: 'white',
+          fontWeight: 'bold',
+        },
+      },
+    },
+
+    MuiFab: {
+      styleOverrides: {
+        root: {
+          color: 'white',
+        },
+      },
+    },
+
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          color: 'white',
+        },
+      },
     },
   },
 });
