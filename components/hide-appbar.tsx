@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
-import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
 type Props1 = {
   children: React.ReactElement;
@@ -30,7 +30,7 @@ type Props2 = {
 
 export default function HideAppBar(props: Props2) {
   return (
-    <React.Fragment>
+    <>
       <HideOnScroll>
         <AppBar>
           <Toolbar sx={{ justifyContent: 'center' }}>
@@ -40,7 +40,8 @@ export default function HideAppBar(props: Props2) {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
-      <Container sx={{ my: 8 }} />
-    </React.Fragment>
+
+      <Box sx={{ my: 6 }} />
+    </>
   );
 }

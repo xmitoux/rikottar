@@ -1,27 +1,39 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import ChatIcon from '@mui/icons-material/Chat';
 import RikotteDialog from '../../components/rikotte-dialog';
+import RikotteCard, { Props as Rikotte } from '../../components/rikotte-card';
 
 export default function MuiTest() {
   const [open, setOpen] = React.useState(false);
-  const dialogCloser = () => {
+
+  const [rikottes, setRikottes] = React.useState<Rikotte[]>([
+    { rikotte: '梨子ちゃんかわいい', sentAt: new Date() },
+  ]);
+
+  /**
+   * Rikotteを送信する
+   */
+  const sendRikotte = (rikotte: Rikotte) => setRikottes([...rikottes, rikotte]);
+
+  /**
+   * Rikotteを描画する
+   */
+  const renderRikottes = () =>
+    rikottes
+      .map((rikkote, i) => (
+        <RikotteCard rikotte={rikkote.rikotte} sentAt={rikkote.sentAt} key={i} />
+      ))
+      .reverse();
+
+  const closerDialog = () => {
     setOpen(false);
   };
 
   return (
-    <div>
-      <Box>
-        {[...new Array(12)]
-          .map(
-            () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-          )
-          .join('\n')}
-      </Box>
+    <Box sx={{ pt: 1 }}>
+      {renderRikottes()}
 
       <Box sx={{ position: 'fixed', bottom: 72, right: 16 }}>
         <Fab color="primary" disableRipple={true} onClick={() => setOpen(true)}>
@@ -29,7 +41,7 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
         </Fab>
       </Box>
 
-      <RikotteDialog open={open} closer={dialogCloser} />
-    </div>
+      <RikotteDialog open={open} closeDialog={closerDialog} rikotteSender={sendRikotte} />
+    </Box>
   );
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -5,6 +6,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import SendIcon from '@mui/icons-material/Send';
+import { Props as Rikotte } from './rikotte-card';
 
 const StyledDialog = styled(Dialog)({
   '& .MuiDialogContent-root': {
@@ -18,12 +20,27 @@ const StyledDialog = styled(Dialog)({
 
 type Props = {
   open: boolean;
-  closer: () => void;
+  closeDialog: () => void;
+  rikotteSender: (prop: Rikotte) => void;
 };
 
-export default function RikotteDialog({ closer, open }: Props) {
+export default function RikotteDialog({
+  closeDialog,
+  open,
+  rikotteSender,
+}: Props) {
+  const [rikotte, setRikotte] = React.useState('');
+
+  const inputRikotte = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setRikotte(event.target.value);
+
+  const sendRikotte = () => {
+    rikotteSender({ rikotte, sentAt: new Date() });
+    closeDialog();
+  };
+
   return (
-    <StyledDialog open={open} onClose={closer} fullWidth maxWidth="xs">
+    <StyledDialog open={open} onClose={closeDialog} fullWidth maxWidth="xs">
       <DialogContent>
         <TextField
           variant="outlined"
@@ -32,10 +49,15 @@ export default function RikotteDialog({ closer, open }: Props) {
           autoFocus
           fullWidth
           multiline
+          onChange={inputRikotte}
         />
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" endIcon={<SendIcon />}>
+        <Button
+          variant="contained"
+          endIcon={<SendIcon />}
+          onClick={sendRikotte}
+        >
           送信
         </Button>
       </DialogActions>
