@@ -2,46 +2,44 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import ChatIcon from '@mui/icons-material/Chat';
-import RikotteDialog from '../../components/rikotte-dialog';
-import RikotteCard, { Props as Rikotte } from '../../components/rikotte-card';
+import RikottaCard from '../../components/rikotta-card';
+import RikottaDialog from '../../components/rikotta-dialog';
+import { Rikotta } from '../../utils/types';
 
 export default function MuiTest() {
-  const [open, setOpen] = React.useState(false);
-
-  const [rikottes, setRikottes] = React.useState<Rikotte[]>([
-    { rikotte: '梨子ちゃんかわいい', sentAt: new Date() },
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [rikottaList, setRikottaList] = React.useState<Rikotta[]>([
+    { text: '梨子ちゃんかわいい', sentAt: new Date(), image: null },
   ]);
 
   /**
    * Rikotteを送信する
    */
-  const sendRikotte = (rikotte: Rikotte) => setRikottes([...rikottes, rikotte]);
+  const sendRikotta = (rikotta: Rikotta) => {
+    setRikottaList([...rikottaList, rikotta]);
+  };
 
   /**
    * Rikotteを描画する
    */
-  const renderRikottes = () =>
-    rikottes
-      .map((rikkote, i) => (
-        <RikotteCard rikotte={rikkote.rikotte} sentAt={rikkote.sentAt} key={i} />
-      ))
-      .reverse();
+  const renderRikottaList = () =>
+    rikottaList.map((rikotta, i) => <RikottaCard {...rikotta} key={i} />).reverse();
 
-  const closerDialog = () => {
-    setOpen(false);
+  const closeDialog = () => {
+    setDialogOpen(false);
   };
 
   return (
     <Box sx={{ pt: 1 }}>
-      {renderRikottes()}
+      {renderRikottaList()}
 
       <Box sx={{ position: 'fixed', bottom: 72, right: 16 }}>
-        <Fab color="primary" disableRipple={true} onClick={() => setOpen(true)}>
+        <Fab color="primary" disableRipple={true} onClick={() => setDialogOpen(true)}>
           <ChatIcon />
         </Fab>
       </Box>
 
-      <RikotteDialog open={open} closeDialog={closerDialog} rikotteSender={sendRikotte} />
+      <RikottaDialog open={dialogOpen} closer={closeDialog} sender={sendRikotta} />
     </Box>
   );
 }

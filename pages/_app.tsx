@@ -51,7 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppHeader title="Rikotter"></AppHeader>
+      <AppHeader title="Rikottar"></AppHeader>
       <Component {...pageProps} />
       <AppFooter />
     </ThemeProvider>
