@@ -19,7 +19,7 @@ import PhotoAlbumIcon from '@mui/icons-material/PhotoAlbum';
 import { Rikotta } from '../utils/types';
 
 const Input = styled('input')({ display: 'none' });
-const Img = styled('img')();
+const Img = styled('img')({});
 
 const StyledDialog = styled(Dialog)({
   '& .MuiDialogContent-root': {

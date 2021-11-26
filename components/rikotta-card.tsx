@@ -6,15 +6,15 @@ import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/material/styles';
 import { Rikotta } from '../utils/types';
 
-const Img = styled('img')();
+const Img = styled('img')({});
 
 export default function RikottaCard(props: Rikotta) {
   const { text, image, sentAt } = props;
 
   const formatDate = (date: Date) => {
-    return `${date.getFullYear()}/${
-      date.getMonth() + 1
-    }/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
+    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${
+      date.getUTCHours() + 9
+    }:${date.getMinutes()}`;
   };
 
   return (
